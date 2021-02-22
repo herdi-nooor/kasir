@@ -38,16 +38,23 @@ void menuUtama(){
         std::cout << "pilihan salah" << std::endl;
         break;
     }
-    label_lanjut:
-    std::cout << "lanjut?Y/N : " ;
-    std::cin >> lanjut;
-    if (lanjut == 'y'){
-       menuUtama();
-    }else if(lanjut == 'n'){
-       input = '3' ;
+    std::cout << "---" << std::endl;
+    if(input == '3'){
+      std::cout << ">>" << std::endl;
     }else{
-       std::cout << "pilihan yang anda masukan salah" << std::endl;
-       goto label_lanjut;
+      label_lanjut:
+      std::cout << "lanjut?Y/N : " ;
+      std::cin >> lanjut;
+      if (lanjut == 'y'){
+         menuUtama();
+         break;
+      }else if(lanjut == 'n'){
+        input = '3' ;
+        break;
+      }else{
+        std::cout << "pilihan yang anda masukan salah" << std::endl;
+        goto label_lanjut;
+      }
     }
   }
   std::cout << "akhiri" << std::endl;
@@ -55,7 +62,7 @@ void menuUtama(){
 
 void fbelanja() {
   char y = 'y';
-  int n = 0;
+  int jumlahbarang = 0;
   int totalBaya = 0 ;
   struct belanjaan {
     std::string nama;
@@ -69,23 +76,23 @@ void fbelanja() {
     barang.push_back(belanjaan());
     std::cout << " nama : " ;
     std::cin.ignore();
-    getline(std::cin, barang[n].nama, '\n');
+    getline(std::cin, barang[jumlahbarang].nama, '\n');
     std::cout << " harga : " ;
-    std::cin >> barang[n].harga ;
+    std::cin >> barang[jumlahbarang].harga ;
     std::cout << " jumlah : " ;
-    std::cin >> barang[n].jumlah ;
-    barang[n].totalharga = ((barang[n] .harga) * (barang[n].jumlah)) ;
-    std::cout << "lagi " ;
+    std::cin >> barang[jumlahbarang].jumlah ;
+    barang[jumlahbarang].totalharga = ((barang[jumlahbarang].harga) * (barang[jumlahbarang].jumlah)) ;
+    std::cout << "lagi?(y/n): " ;
     std::cin >> y ;
-    n++;
+    jumlahbarang++;
   }
-  for (int i = 0; i < n ; i++) {
-    std::cout << " nama barang :" << barang[i].nama ;
-    std::cout << "\n jumlah beli :" << barang[i].jumlah ;
-    std::cout << "\n total harga :" << barang[i].totalharga << std::endl;
+  for (int i = 0; i < jumlahbarang ; i++) {
+    std::cout << " nama barang : " << barang[i].nama ;
+    std::cout << "\n jumlah beli : " << barang[i].jumlah ;
+    std::cout << "\n total harga : " << barang[i].totalharga << std::endl;
     totalBaya = totalBaya + barang[i].totalharga ;
   }
-  std::cout << "total bayar : " << totalBaya << std::endl;
+  std::cout << " total bayar : " << totalBaya << std::endl;
   std::cin.ignore();
   std::cin.get();
   menuUtama();
